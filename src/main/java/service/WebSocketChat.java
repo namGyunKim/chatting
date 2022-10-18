@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Service
 @Slf4j
-@ServerEndpoint(value = "/chattt")
+@ServerEndpoint(value = "/chatt")
 public class WebSocketChat {
     /**
      * 새로운 클라이언트가 접속할 때마다 클라이언트의 세션 관련 정보를 정적형으로 저장하여 1:N의 통신이 가능

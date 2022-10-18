@@ -1,4 +1,4 @@
-package kr.namgyun.chatting.config;//package kr.co.nagaja.app.config.basic;
+package kr.namgyun.chatting.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
