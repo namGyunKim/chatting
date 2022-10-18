@@ -1,18 +1,3 @@
-server:
-  port: 8080
-  servlet:
-    context-path: /
-    encoding:
-      charset: utf-8
-      enabled: true
-      force: true
-    session:
-      timeout: 518400m # 60m * 24h * 30d * 12M
-#      cookie:
-#        max-age: 518400m    # 60m * 24h * 30d * 12M
-#        name: remember-me
-#        http-only: true
-#        secure: true
 
 spring:
   thymeleaf:
