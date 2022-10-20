@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Websocket Chat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+
+    <input type="text" id="name">
+    <input type="button" onclick="connect();" value="connect" >
+    <input type="button" onclick="send();" value="send" >
+</body>
+<script>
+    let socket = new SockJS('/websocket');
+    let stompClient = Stomp.over(socket);
+    function connect() {
+
+        stompClient.connect({}, function (frame) {
+            console.log('conneted:' + frame);
+            stompClient.subscribe('/topic/users', function (response) {
+                console.log(response);
+                console.log(JSON.parse(response.body));
+            });
+        });
+    }
+
+    /**
+     * 첫번째 인자는 설정파일의 app과 컨트롤러의 매핑주소 user
+     * 두번째 인자는 서버로 보낼때 추가하고싶은 헤더
+     * 세번째 인자는 서버로 보낼 바디
+     */
+    function send(){
+        console.log('sending');
+        let name=document.getElementById("name").value;
+        stompClient.send("/app/user",{},JSON.stringify({name: name}))
+    }
+
+</script>
+</html>

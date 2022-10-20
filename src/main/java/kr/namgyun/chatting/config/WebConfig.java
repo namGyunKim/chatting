@@ -27,12 +27,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
         registry.addResourceHandler("/font/**").addResourceLocations("classpath:/static/font/");
     }
-    /**
-     * 웹소켓을 위한 설정
-     */
-    @Bean
-    public ServerEndpointExporter serverEndpointExporter() {
-        return new ServerEndpointExporter();
-    }
+
 
 }
