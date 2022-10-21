@@ -22,7 +22,8 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry registry) {
 
         /**
-         * queue는 1대1 topic은 1대 다에서 사용
+         * queue는 1대1
+         * topic은 1대 다에서 사용
          */
         registry.enableSimpleBroker("/queue", "/topic");
 

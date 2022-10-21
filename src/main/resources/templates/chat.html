@@ -13,6 +13,7 @@
 
     <input type="text" id="name">
     <input type="button" onclick="connect();" value="connect" >
+    <input type="text" id="msg">
     <input type="button" onclick="send();" value="send" >
 </body>
 <script>
@@ -43,7 +44,9 @@
     function send(){
         console.log('sending');
         let name=document.getElementById("name").value;
-        stompClient.send("/app/user",{},JSON.stringify({name: name}))
+        let msg=document.getElementById("msg").value;
+
+        stompClient.send("/app/user",{},JSON.stringify({name: name,msg:msg}))
     }
 
 </script>
