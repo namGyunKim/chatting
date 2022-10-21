@@ -1,6 +1,7 @@
 package kr.namgyun.chatting.controller;
 
 
+import kr.namgyun.chatting.dto.ChatMessage;
 import kr.namgyun.chatting.dto.ChatRoom;
 import kr.namgyun.chatting.service.ChatService;
 import lombok.extern.slf4j.Slf4j;
@@ -54,17 +55,22 @@ public class StompController {
         return "/chat/room";
     }
     // 모든 채팅방 목록 반환
-    @GetMapping("/rooms")
+    @RequestMapping("/rooms")
     @ResponseBody
     public List<ChatRoom> room() {
-        return chatService.findAllRoom();
+
+        log.info("모든 채팅방 목록 :");
+        List<ChatRoom> chatRoomList =chatService.findAllRoom();
+        return chatRoomList;
     }
     // 채팅방 생성
     @PostMapping("/room")
     @ResponseBody
-    public ChatRoom createRoom(@RequestParam String roomId) {
-        log.info("채팅룸 생성");
-        return chatService.createRoom(roomId);
+    public ChatRoom createRoom(ChatMessage chatMessage) {
+        log.info("채팅룸 생성"+chatMessage);
+        ChatRoom room = chatService.createRoom(chatMessage);
+        log.info("생성된 채팅룸 :"+room);
+        return room;
     }
     // 채팅방 입장 화면
     @GetMapping("/room/enter/{roomId}")
@@ -73,10 +79,11 @@ public class StompController {
         return "/chat/roomdetail";
     }
     // 특정 채팅방 조회
-    @GetMapping("/room/{roomId}")
+    @RequestMapping("/roomInfo")
     @ResponseBody
-    public ChatRoom roomInfo(@PathVariable String roomId) {
-        ChatRoom chatRoom =chatService.findById(roomId);
+    public ChatRoom roomInfo(ChatMessage chatMessage) {
+        log.info("들어온 채팅메시지:"+chatMessage);
+        ChatRoom chatRoom =chatService.findById(chatMessage.getRoomId());
         log.info("채팅룸 :"+chatRoom);
         return chatRoom;
     }

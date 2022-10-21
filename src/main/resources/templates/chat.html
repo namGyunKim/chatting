@@ -11,14 +11,15 @@
 </head>
 <body>
 
-    <input type="text" id="name">
-    <input type="button" onclick="connect();" value="connect" >
-    <input type="text" id="msg">
-    <input type="button" onclick="send();" value="send" >
-    <input type="text" id="create">
-    <input type="button" onclick="createRoom();" value="채팅방 생성" >
-    <input type="text" id="targetRoom">
-    <input type="button" onclick="targetRoom();" value="채팅방 조회" >
+    <input type="text" id="name" value="김남균">
+    <input type="button" onclick="connect();" value="connect" ><p></p>
+    <input type="text" id="msg" value="하이">
+    <input type="button" onclick="send();" value="send" ><p></p>
+    <input type="text" id="create" value="a">
+    <input type="button" onclick="createRoom();" value="채팅방 생성" ><p></p>
+    <input type="text" id="targetRoom" value="a">
+    <input type="button" onclick="targetRoom();" value="채팅방 조회" ><p></p>
+    <input type="button" onclick="rooms();" value="모든 채팅방 조회" ><p></p>
 </body>
 <script>
     let stompClient;
@@ -46,35 +47,55 @@
      * 세번째 인자는 서버로 보낼 바디
      */
     function send(){
-        console.log('sending');
         let name=document.getElementById("name").value;
         let msg=document.getElementById("msg").value;
+        let target=document.getElementById("targetRoom").value;
+        let create=document.getElementById("create").value;
+        console.log('sending');
         stompClient.send("/app/user",{},JSON.stringify({name: name,msg:msg}))
 
     }
-    let create=document.getElementById("create").value;
 
 
     function createRoom(){
+        let name=document.getElementById("name").value;
+        let msg=document.getElementById("msg").value;
+        let target=document.getElementById("targetRoom").value;
+        let create=document.getElementById("create").value;
         $.ajax({
             type: "POST",
             url: "/room",
             data: {
-                "roomId": create
+                "roomId": create,
+                "roomName":name
             },
             success: function (data){
             }
 
         });
     }
-    let targetRoom=document.getElementById("targetRoom").value;
 
     function targetRoom(){
+        let name=document.getElementById("name").value;
+        let msg=document.getElementById("msg").value;
+        let target=document.getElementById("targetRoom").value;
+        let create=document.getElementById("create").value;
         $.ajax({
             type: "POST",
-            url: "/room",
+            url: "/roomInfo",
             data: {
-                "roomId" :targetRoom
+                "roomId" :target
+            },
+            success: function (data){
+            }
+
+        });
+    }
+    function rooms(){
+        $.ajax({
+            type: "POST",
+            url: "/rooms",
+            data: {
             },
             success: function (data){
             }

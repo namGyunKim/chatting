@@ -1,6 +1,7 @@
 package kr.namgyun.chatting.service;
 
 
+import kr.namgyun.chatting.dto.ChatMessage;
 import kr.namgyun.chatting.dto.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +38,8 @@ public class ChatService {
     }
 
     //채팅방 생성
-    public ChatRoom createRoom(String name) {
-        ChatRoom chatRoom = ChatRoom.create(name);
+    public ChatRoom createRoom(ChatMessage chatMessage) {
+        ChatRoom chatRoom = ChatRoom.create(chatMessage);
         chatRooms.put(chatRoom.getRoomId(), chatRoom);
         return chatRoom;
     }
