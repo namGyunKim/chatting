@@ -20,6 +20,10 @@
     <input type="text" id="targetRoom" value="a">
     <input type="button" onclick="targetRoom();" value="채팅방 조회" ><p></p>
     <input type="button" onclick="rooms();" value="모든 채팅방 조회" ><p></p>
+    <div id="greetings">
+
+    </div>
+
 </body>
 <script>
     let stompClient;
@@ -33,10 +37,13 @@
         console.log("남규니 = ", socket)
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
-            console.log('conneted:' + frame);
-            stompClient.subscribe('/topic/users', function (response) {
-                console.log(response);
+            // console.log('conneted:' + frame);
+            stompClient.subscribe('/topic/a', function (response) {
+                // console.log(response);
+                console.log('실행');
                 console.log(JSON.parse(response.body));
+                console.log('실행');
+                showChat(JSON.parse(response.body))
             });
         });
     }
@@ -101,6 +108,11 @@
             }
 
         });
+    }
+
+    function showChat(chat) {
+        console.log("들어옴");
+        $("#greetings").append("<tr><td>" + chat.name + " : " + chat.message + "</td></tr>");
     }
 
 </script>
