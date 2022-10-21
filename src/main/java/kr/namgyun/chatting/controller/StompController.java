@@ -62,8 +62,9 @@ public class StompController {
     // 채팅방 생성
     @PostMapping("/room")
     @ResponseBody
-    public ChatRoom createRoom(@RequestParam String name) {
-        return chatService.createRoom(name);
+    public ChatRoom createRoom(@RequestParam String roomId) {
+        log.info("채팅룸 생성");
+        return chatService.createRoom(roomId);
     }
     // 채팅방 입장 화면
     @GetMapping("/room/enter/{roomId}")
@@ -75,6 +76,8 @@ public class StompController {
     @GetMapping("/room/{roomId}")
     @ResponseBody
     public ChatRoom roomInfo(@PathVariable String roomId) {
-        return chatService.findById(roomId);
+        ChatRoom chatRoom =chatService.findById(roomId);
+        log.info("채팅룸 :"+chatRoom);
+        return chatRoom;
     }
 }

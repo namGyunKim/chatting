@@ -15,6 +15,10 @@
     <input type="button" onclick="connect();" value="connect" >
     <input type="text" id="msg">
     <input type="button" onclick="send();" value="send" >
+    <input type="text" id="create">
+    <input type="button" onclick="createRoom();" value="채팅방 생성" >
+    <input type="text" id="targetRoom">
+    <input type="button" onclick="targetRoom();" value="채팅방 조회" >
 </body>
 <script>
     let stompClient;
@@ -45,8 +49,37 @@
         console.log('sending');
         let name=document.getElementById("name").value;
         let msg=document.getElementById("msg").value;
-
         stompClient.send("/app/user",{},JSON.stringify({name: name,msg:msg}))
+
+    }
+    let create=document.getElementById("create").value;
+
+
+    function createRoom(){
+        $.ajax({
+            type: "POST",
+            url: "/room",
+            data: {
+                "roomId": create
+            },
+            success: function (data){
+            }
+
+        });
+    }
+    let targetRoom=document.getElementById("targetRoom").value;
+
+    function targetRoom(){
+        $.ajax({
+            type: "POST",
+            url: "/room",
+            data: {
+                "roomId" :targetRoom
+            },
+            success: function (data){
+            }
+
+        });
     }
 
 </script>
