@@ -20,6 +20,7 @@
     <input type="text" id="targetRoom" value="a">
     <input type="button" onclick="targetRoom();" value="채팅방 조회" ><p></p>
     <input type="button" onclick="rooms();" value="모든 채팅방 조회" ><p></p>
+    <input type="button" onclick="exit();" value="웹소켓 닫기" ><p></p>
     <div id="greetings">
 
     </div>
@@ -110,6 +111,10 @@
 
     function showChat(chat) {
         $("#greetings").append("<tr><td>" + chat.name +"</td></tr>");
+    }
+
+    function exit(){
+        stompClient.disconnect();
     }
 
 </script>
