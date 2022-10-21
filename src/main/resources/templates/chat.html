@@ -38,11 +38,9 @@
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             // console.log('conneted:' + frame);
-            stompClient.subscribe('/topic/a', function (response) {
+            stompClient.subscribe('/topic/ab', function (response) {
                 // console.log(response);
-                console.log('실행');
                 console.log(JSON.parse(response.body));
-                console.log('실행');
                 showChat(JSON.parse(response.body))
             });
         });
@@ -111,8 +109,7 @@
     }
 
     function showChat(chat) {
-        console.log("들어옴");
-        $("#greetings").append("<tr><td>" + chat.name + " : " + chat.message + "</td></tr>");
+        $("#greetings").append("<tr><td>" + chat.name +"</td></tr>");
     }
 
 </script>

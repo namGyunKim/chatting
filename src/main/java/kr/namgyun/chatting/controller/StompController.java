@@ -45,15 +45,10 @@ public class StompController {
       log.info("메시지 :"+msg);
         Map<String , Object> dataMap = new HashMap<>();
         dataMap.put("name",msg);
-        simpMessagingTemplate.convertAndSend("/topic/a",dataMap);
+        simpMessagingTemplate.convertAndSend("/topic/ab",dataMap);
 
     }
 
-    // 채팅 리스트 화면
-    @GetMapping("/room")
-    public String rooms(Model model) {
-        return "/chat/room";
-    }
     // 모든 채팅방 목록 반환
     @RequestMapping("/rooms")
     @ResponseBody
@@ -71,12 +66,6 @@ public class StompController {
         ChatRoom room = chatService.createRoom(chatMessage);
         log.info("생성된 채팅룸 :"+room);
         return room;
-    }
-    // 채팅방 입장 화면
-    @GetMapping("/room/enter/{roomId}")
-    public String roomDetail(Model model, @PathVariable String roomId) {
-        model.addAttribute("roomId", roomId);
-        return "/chat/roomdetail";
     }
     // 특정 채팅방 조회
     @RequestMapping("/roomInfo")
