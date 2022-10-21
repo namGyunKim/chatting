@@ -59,8 +59,8 @@ public class StompController {
     @ResponseBody
     public List<ChatRoom> room() {
 
-        log.info("모든 채팅방 목록 :");
         List<ChatRoom> chatRoomList =chatService.findAllRoom();
+        log.info("모든 채팅방 목록 :"+chatRoomList);
         return chatRoomList;
     }
     // 채팅방 생성
